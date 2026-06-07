@@ -4,7 +4,7 @@
 
 **Welcome to the Blue Moon Portal**—the central nervous system for the Byte Size Kai initiative. This repository houses the architecture for an autonomous, on-premise agritech crop tracker designed to optimize microgreen cultivation through edge-based AI.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)  
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)  
 [![Hardware: Edge AI](https://img.shields.io/badge/Hardware-Raspberry%20Pi%205%20%2B%20NPU-orange.svg)]()  
 [![Sovereignty: Offline Native](https://img.shields.io/badge/Sovereignty-Offline%20Native-green.svg)]()  
@@ -253,7 +253,7 @@ This project is open-source and welcomes contributions from the agritech and edg
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+This project is Licensed under the Coastal Alpine Tech Limited License. See `LICENSE` for details.
 
 ## Attribution
 
