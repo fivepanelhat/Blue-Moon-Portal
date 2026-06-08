@@ -11,7 +11,8 @@
 [![Sovereignty: Offline Native](https://img.shields.io/badge/Sovereignty-Offline%20Native-green.svg)]()  
 [![CI/CD: Active](https://github.com/fivepanelhat/Blue-Moon-Portal/actions/workflows/ci.yml/badge.svg)](https://github.com/fivepanelhat/Blue-Moon-Portal/actions)  
 [![SecOps Scan](https://img.shields.io/github/actions/workflow/status/fivepanelhat/Blue-Moon-Portal/portal-security-scan.yml?branch=main&label=SecOps%20Scan&style=flat-square&color=success)](https://github.com/fivepanelhat/Blue-Moon-Portal/actions/workflows/portal-security-scan.yml)  
-[![Dependabot](https://img.shields.io/badge/Dependencies-Monitored-brightgreen?style=flat-square&logo=dependabot)]()
+[![Dependabot](https://img.shields.io/badge/Dependencies-Monitored-brightgreen?style=flat-square&logo=dependabot)]()  
+[![Interop](https://img.shields.io/badge/Interop-MQTT%20%7C%20OPC--UA-orange?style=flat-square)]()
 
 ## The 5 Ws: Project Context
 
