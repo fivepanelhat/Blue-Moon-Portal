@@ -12,6 +12,8 @@ Asynchronous event loop that:
 import asyncio
 import logging
 import os
+import sys
+import signal
 from typing import Optional
 from datetime import datetime
 from dotenv import load_dotenv
@@ -214,8 +216,27 @@ class BlueMonPortal:
 
             logger.info("Blue Moon Portal is ONLINE and processing")
 
-            # Keep running
-            await asyncio.gather(pruner_task, sensor_task)
+            # Keep running and monitor background tasks for failures
+            done, pending = await asyncio.wait(
+                [pruner_task, sensor_task],
+                return_when=asyncio.FIRST_COMPLETED
+            )
+            
+            # If any background task finishes/fails, log the details and terminate
+            for task in done:
+                exc = task.exception()
+                if exc:
+                    logger.error(f"Critical background task failed: {exc}", exc_info=exc)
+                else:
+                    logger.warning(f"Background task finished unexpectedly: {task.get_name() if hasattr(task, 'get_name') else task}")
+            
+            # Cancel the remaining running tasks
+            for task in pending:
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
 
         except Exception as e:
             logger.error(f"Portal startup error: {e}")
@@ -240,10 +261,20 @@ async def main():
     """Main entry point."""
     portal = BlueMonPortal(config)
 
+    # Register signal handlers for graceful shutdown on Unix/Linux
+    if sys.platform != "win32":
+        loop = asyncio.get_running_loop()
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            try:
+                loop.add_signal_handler(sig, lambda: asyncio.create_task(portal.stop()))
+            except Exception as e:
+                logger.warning(f"Failed to register signal handler for {sig}: {e}")
+
     try:
         await portal.start()
-    except KeyboardInterrupt:
-        logger.info("Received interrupt signal")
+    except (KeyboardInterrupt, asyncio.CancelledError):
+        logger.info("Received stop signal")
+    finally:
         await portal.stop()
 
 
