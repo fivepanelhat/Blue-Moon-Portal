@@ -8,6 +8,44 @@ Original file is located at
 """
 
 import os
+# Gracefully handle Google Colab and IPython imports when running locally
+import sys
+import os
+
+try:
+    from google.colab import drive, userdata, files
+except ImportError:
+    class MockDrive:
+        def mount(self, *args, **kwargs):
+            print("[INFO] Running locally: Google Drive mount bypassed.")
+    
+    class MockUserdata:
+        def get(self, key, default=None):
+            return os.environ.get(key, default)
+            
+    class MockFiles:
+        def upload(self):
+            print("[INFO] Running locally: File upload bypassed.")
+            return {}
+            
+    sys.modules['google.colab'] = type(sys)('google_colab')
+    sys.modules['google.colab'].drive = MockDrive()
+    sys.modules['google.colab'].userdata = MockUserdata()
+    sys.modules['google.colab'].files = MockFiles()
+    from google.colab import drive, userdata, files
+
+try:
+    from IPython.display import display, Image
+except ImportError:
+    def display(*args, **kwargs):
+        for arg in args:
+            print(arg)
+    class Image:
+        def __init__(self, filename=None, *args, **kwargs):
+            self.filename = filename
+        def __repr__(self):
+            return f"Image({self.filename})"
+
 
 # Verification script path
 verify_script = 'tools/verify_setup.py'
@@ -19,7 +57,7 @@ else:
     print(f'Verification script not found at {verify_script}. Performing manual environment check...')
 
     paths_to_check = [
-        '/content/drive/MyDrive/Sting_Operation_AI',
+        os.getcwd(),
         '/content/drive/MyDrive/Sting_Operation_AI/data/images/train',
         '/content/drive/MyDrive/Sting_Operation_AI/config/data.yaml',
         '/content/drive/MyDrive/Sting_Operation_AI/models/trained_models/sting_operation_v5/weights/best.pt'
@@ -42,7 +80,7 @@ drive.mount('/content/drive', force_remount=True)
 import os
 
 # Define our base project directory on your Google Drive
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Define the sub-folder architecture
 folders = [
@@ -633,7 +671,7 @@ from IPython.display import Image, display
 import shutil
 
 # Define the base project directory (from Cell 2)
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Define the persistent directory where the trained models are saved in Google Drive
 persistent_models_base_dir = os.path.join(project_path, 'models', 'trained_models')
@@ -824,7 +862,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC"
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # Target the previously successful dataset (since I cannot browse Roboflow for new ones)
@@ -904,7 +942,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC"
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # Target the previously successful dataset (since I cannot browse Roboflow for new ones)
@@ -984,7 +1022,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC"
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # Target the previously successful dataset (since I cannot browse Roboflow for new ones)
@@ -1206,7 +1244,7 @@ import shutil
 data_yaml_path = '/content/drive/MyDrive/Sting_Operation_AI/config/data.yaml'
 
 # Define the project path
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Load a pre-trained YOLOv8n model
 # Re-initialize the model to ensure its internal 'overrides' dictionary is correctly populated
@@ -1266,7 +1304,7 @@ import os
 # This path is based on the 'project' and 'name' arguments used in model.train()
 # The name should reflect the 'trained_yolov8n_bees_wasps_augmented' folder created during the last training.
 # Dynamically find the latest run directory for 'trained_yolov8n_bees_wasps_augmented'
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 persistent_models_dir_base = os.path.join(project_path, 'models', 'trained_models')
 
 # Look for a directory starting with 'trained_yolov8n_bees_wasps_augmented'
@@ -1468,7 +1506,7 @@ First, list the current directory structure to understand what files and folders
 
 import os
 
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # --- Step 1: Review the current project directory structure ---
 print(f"Reviewing project directory structure at: {project_path}\n")
@@ -1539,7 +1577,7 @@ Create a basic `README.md` file with a clear outline covering project goals, set
 
 import os
 
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # --- Step 3: Draft a basic README.md outline ---
 readme_content = """
@@ -1682,7 +1720,7 @@ print(f"Scripts 'train.py' and 'predict.py' successfully created in {project_pat
 import os
 
 # Set the working directory to the project folder
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 # %cd {project_path}
 
 # Run the standalone training script
@@ -1734,7 +1772,7 @@ Our latest iteration (**sting_operation_v3**) recorded a validation **mAP50 of 0
 """
 
 # Define the target path
-readme_path = os.path.join('/content/drive/MyDrive/Sting_Operation_AI', 'README.md')
+readme_path = os.path.join(os.getcwd(), 'README.md')
 
 # Write the file
 with open(readme_path, 'w') as f:
@@ -1750,7 +1788,7 @@ Follow the instructions in the cell below to connect your Google Drive project f
 import os
 
 # Set your project path
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 # %cd {project_path}
 
 # 1. Initialize Git
@@ -1870,7 +1908,7 @@ GITHUB_PAT = os.environ.get("GITHUB_PAT", "YOUR_GITHUB_PAT")
 # 2. Settings
 USERNAME = "fivepanelhat"
 REPO_NAME = "Sting-Operation-AI"
-PROJECT_PATH = '/content/drive/MyDrive/Sting_Operation_AI'
+PROJECT_PATH = os.getcwd()
 
 # 3. Execution
 if GITHUB_PAT == "PASTE_YOUR_TOKEN_HERE":
@@ -1922,7 +1960,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # !!! IMPORTANT: UPDATE THESE VALUES with the details of the NEW Roboflow dataset you identified !!!
@@ -2005,7 +2043,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # =============================================================================
@@ -2092,7 +2130,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # =============================================================================
@@ -2179,7 +2217,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # =============================================================================
@@ -2631,7 +2669,7 @@ from ultralytics import YOLO
 import os
 
 data_yaml_path = '/content/drive/MyDrive/Sting_Operation_AI/config/data.yaml'
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Load a pre-trained YOLOv8n model
 model = YOLO('yolov8n.pt')
@@ -2768,7 +2806,7 @@ from ultralytics import YOLO
 import os
 
 data_yaml_path = '/content/drive/MyDrive/Sting_Operation_AI/config/data.yaml'
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Load a pre-trained YOLOv8n model
 model = YOLO('yolov8n.pt')
@@ -2900,7 +2938,7 @@ from ultralytics import YOLO
 import os
 
 data_yaml_path = '/content/drive/MyDrive/Sting_Operation_AI/config/data.yaml'
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Load a pre-trained YOLOv8n model
 model = YOLO('yolov8n.pt')
@@ -2976,7 +3014,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # ====================================================================================
@@ -3101,7 +3139,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # ====================================================================================
@@ -3192,7 +3230,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # ====================================================================================
@@ -3886,7 +3924,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # ====================================================================================
@@ -3976,7 +4014,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # ====================================================================================
@@ -4066,7 +4104,7 @@ ROBOFLOW_API_KEY = "NQNQbsiMxbU33fU0UvbC" # Keep using the previously successful
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
 # Define the project path from previous steps
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_data_base_path = os.path.join(project_path, 'data')
 
 # ====================================================================================
@@ -4575,7 +4613,7 @@ NEW_ROBOFLOW_WORKSPACE = "ws-workspace-yhner"
 NEW_ROBOFLOW_PROJECT = "find-vespula-germanica"
 
 # 2. Setup paths
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 target_path = os.path.join(project_path, 'data')
 
 # 3. Connect and List Versions
@@ -4678,7 +4716,7 @@ print(f"Current Validation Images: {count_files(base + '/val')}")
 import os
 
 # Ensure the base project path is correct
-project_path = '/content/drive/MyDrive/Sting_Operation_AI'
+project_path = os.getcwd()
 
 # Define the sub-folder architecture for images and labels
 folders = [
