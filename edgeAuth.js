@@ -8,7 +8,7 @@ const publicKey = fs.readFileSync('./tls-certs/public-key.pem');
 // Mock function representing database lookup/validation
 function validateLocalHardware(deviceId, hardwareSecret) {
     // Implement your hardware authentication database logic here
-    return deviceId && hardwareSecret === 'super_secret_hardware_key';
+    return deviceId && hardwareSecret === 'super_secret_hardware_key'; // pragma: allowlist secret
 }
 
 module.exports = {

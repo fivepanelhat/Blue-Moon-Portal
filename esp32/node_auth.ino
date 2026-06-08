@@ -5,12 +5,12 @@
 
 // --- Edge Node Configuration ---
 const char* ssid = "YOUR_LOCAL_WIFI_SSID";
-const char* password = "YOUR_LOCAL_WIFI_PASSWORD";
-const char* portalAuthUrl = "http://YOUR_PORTAL_IP:3000/edge-auth";
+const char* password = "YOUR_LOCAL_WIFI_PASSWORD"; // pragma: allowlist secret
+const String portalAuthUrl = "http://YOUR_PORTAL_IP:3000/edge-auth";
 
 // The hardcoded secret for this specific device
 const String deviceId = "ESP32_NODE_01";
-const String hardwareSecret = "YOUR_DEVICE_SECRET";
+const String hardwareSecret = "YOUR_DEVICE_SECRET"; // pragma: allowlist secret
 
 // NVS Storage object
 Preferences preferences;
