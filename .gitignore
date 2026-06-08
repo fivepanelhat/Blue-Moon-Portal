@@ -71,3 +71,19 @@ Thumbs.db
 
 # Optional: Exclude large model files if versioning locally
 # ollama_models/
+
+# Coastal Alpine Tech - Portal SecOps
+.env.*
+*.pem
+*.key
+*.crt
+secrets/
+.secrets.baseline
+tls-certs/
+
+# Web/Portal specific
+node_modules/
+dist/
+build/
+coverage/
+
