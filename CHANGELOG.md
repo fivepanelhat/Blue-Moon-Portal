@@ -1,5 +1,9 @@
 # Blue Moon Portal - Changelog
 
+## Version 1.2.0 - 2026-06-08
+- Aligned project with Coastal Alpine Stack version 1.2.0.
+- Upgraded configuration schemas.
+
 ## Version 0.1.0 - Initial Implementation Complete ✓
 
 ### Major Features Implemented
