@@ -15,7 +15,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     ]
 
 setup(
-    name="blue-moon-portal",
+    name="blue_moon_portal",
     version="0.1.0",
     author="Coastal Alpine Tech Limited",
     author_email="info@coastalalpine.co.nz",
