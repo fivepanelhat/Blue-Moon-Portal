@@ -19,9 +19,12 @@ jobs:
         python-version: '3.10'
         
     - name: Install system dependencies
+      # libgl1-mesa-glx was removed in Ubuntu 24.04 (noble). Replacement:
+      # libgl1 provides libGL.so.1 (required by opencv-python)
+      # libglib2.0-0 provides libgthread-2.0.so.0 (required by opencv-python)
       run: |
         sudo apt-get update
-        sudo apt-get install -y portaudio19-dev libasound2-dev libgl1-mesa-glx
+        sudo apt-get install -y portaudio19-dev libasound2-dev libgl1 libglib2.0-0
         
     - name: Install dependencies
       run: |
