@@ -1,0 +1,29 @@
+name: Stack-Wide SecOps Trigger
+
+on:
+  workflow_dispatch: 
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  trigger-scans:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code & Submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.CI_PAT }}
+
+      - name: Configure Git Bot Identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global commit.gpgsign false
+
+      - name: Trigger All Submodules
+        run: |
+          git submodule foreach '
+            git commit --allow-empty -m "chore: automated stack-wide SecOps trigger"
+            git push origin HEAD:main
+          '
