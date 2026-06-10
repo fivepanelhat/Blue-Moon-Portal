@@ -1,5 +1,8 @@
 # Blue Moon Portal: Byte Size Kai
 
+![CI](https://github.com/UNKNOWN_OWNER/Blue-Moon-Portal/actions/workflows/secops.yml/badge.svg?branch=main)
+
+
 ![Blue Moon Portal Banner](assets/social_preview.png)
 
 **Welcome to the Blue Moon Portal**—the central nervous system for the Byte Size Kai initiative. This repository houses the architecture for an autonomous, on-premise agritech crop tracker designed to optimize microgreen cultivation through edge-based AI.

@@ -1,6 +1,7 @@
 # Blue Moon Portal - Changelog
 
 ## Version 1.2.0 - 2026-06-08
+
 - Aligned project with Coastal Alpine Stack version 1.2.0.
 - Upgraded configuration schemas.
 
@@ -9,6 +10,7 @@
 ### Major Features Implemented
 
 #### 1. AI Agent with Ollama Integration ✓
+
 - **Status**: Complete
 - Full LLM integration with Ollama for crop optimization reasoning
 - Implemented methods:
@@ -24,6 +26,7 @@
   - Schema validation via Pydantic
 
 #### 2. Hardware Control System ✓
+
 - **Status**: Complete
 - GPIO-based actuator control with graceful degradation
 - Implemented:
@@ -40,6 +43,7 @@
   - `enforce_plan()` method to execute optimization plans
 
 #### 3. Configuration Management ✓
+
 - **Status**: Complete
 - Pydantic-based configuration validation
 - Implemented:
@@ -58,6 +62,7 @@
   - LoggingConfig: Output settings
 
 #### 4. MQTT Client Enhancement ✓
+
 - **Status**: Complete
 - Improved async MQTT subscription with retry logic
 - Implemented:
@@ -68,6 +73,7 @@
   - Automatic subscription to sensor topics
 
 #### 5. AV Capture Enhancement ✓
+
 - **Status**: Complete
 - Improved health check with graceful degradation
 - Implemented:
@@ -78,6 +84,7 @@
   - Proper exception handling for missing libraries
 
 #### 6. Media Pruner ✓
+
 - **Status**: Complete
 - Storage lifecycle management
 - Implemented:
@@ -88,6 +95,7 @@
   - Storage statistics reporting
 
 #### 7. Error Handling & Resilience ✓
+
 - **Status**: Complete
 - Comprehensive error handling throughout codebase
 - Implemented:
@@ -99,6 +107,7 @@
   - Health check verification before startup
 
 #### 8. System Validation & Testing ✓
+
 - **Status**: Complete
 - `validate.py` script for pre-deployment verification
 - Tests:
@@ -115,6 +124,7 @@
   - Ready/not-ready determination
 
 #### 9. Documentation ✓
+
 - **Status**: Complete
 - GETTING_STARTED.md guide covering:
   - Quick start setup
@@ -150,7 +160,7 @@
 1. **portal_core/ai_agent.py** - Full LLM integration (270 lines of implementation)
 2. **portal_core/mqtt_client.py** - Connection retry logic
 3. **portal_core/av_capture.py** - Improved health check
-4. **portal_core/__init__.py** - Updated exports
+4. **portal_core/**init**.py** - Updated exports
 5. **main.py** - Config integration, hardware enforcement
 6. **.env.example** - Expanded documentation
 
@@ -241,6 +251,7 @@
 ## Support & Contributing
 
 For issues or questions:
+
 - Review GETTING_STARTED.md
 - Run validate.py to check system health
 - Check logs for detailed error messages

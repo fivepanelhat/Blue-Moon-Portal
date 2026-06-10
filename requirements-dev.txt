@@ -5,15 +5,15 @@
 -r requirements.txt
 
 # Testing Framework
-# Upgraded from 7.4.3 + 0.21.1: resolves dependency conflict with newer pytest-asyncio
-pytest>=8.3.0
+# Upgraded to resolve dependency conflicts with newer pytest-asyncio
+pytest>=9.0.3
 pytest-asyncio>=0.24.0
 pytest-cov>=5.0.0
 pytest-mock>=3.14.0
 
 # Code Formatting
 # Upgraded from 23.12.0: maintenance updates
-black>=24.10.0
+black>=26.3.1
 
 # Static Type Checking
 mypy>=1.13.0

@@ -17,7 +17,7 @@ pydantic-settings>=2.1.0
 # Upgraded from 4.8.1.78: missing patch for CVE-2025-53644 (critical, CVSS 9.8, fixed in 4.12.0)
 opencv-python>=4.12.0
 
-numpy>=1.21.2,<2
+numpy>=2.0,<3
 
 # Audio Processing
 # pyaudio==0.2.13
