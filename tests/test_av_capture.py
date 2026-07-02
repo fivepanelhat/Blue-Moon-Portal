@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock, patch
-from portal_core.av_capture import AVCapture
+from coastal_alpine_core.portal_core.av_capture import AVCapture
 
 
 @pytest.fixture

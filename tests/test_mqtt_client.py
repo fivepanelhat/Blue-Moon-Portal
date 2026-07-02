@@ -2,7 +2,7 @@ import pytest
 import asyncio
 import json
 from unittest.mock import MagicMock, patch
-from portal_core.mqtt_client import MQTTClient
+from coastal_alpine_core.portal_core.mqtt_client import MQTTClient
 
 
 @pytest.fixture

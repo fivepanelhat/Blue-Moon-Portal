@@ -1,13 +1,13 @@
 import pytest
 from unittest.mock import AsyncMock
 from main import BlueMonPortal
-from portal_core.config import load_config
+from coastal_alpine_core.portal_core import load_bluemoon_config
 
 
 @pytest.fixture
 def test_config():
     # Load configuration and force simulation/dev defaults
-    config = load_config()
+    config = load_bluemoon_config()
     config.hardware.enable_hardware_control = False  # simulation mode
     config.mqtt.broker = "localhost"
     config.ollama.host = "http://localhost:11434"

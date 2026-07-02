@@ -1,7 +1,7 @@
 import pytest
 import asyncio
 from unittest.mock import patch
-from portal_core.ai_agent import AIAgent
+from coastal_alpine_core.portal_core.ai_agent import AIAgent
 
 
 @pytest.fixture

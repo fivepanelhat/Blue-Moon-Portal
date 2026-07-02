@@ -10,12 +10,14 @@ import sys
 import signal
 from datetime import datetime
 
-from portal_core.config import load_config, print_config
-from portal_core.ai_agent import AIAgent
-from portal_core.mqtt_client import MQTTClient
-from portal_core.av_capture import AVCapture
-from portal_core.media_pruner import MediaPruner
-from portal_core.hardware_control import HardwareControl
+from coastal_alpine_core.portal_core import (
+    load_bluemoon_config, 
+    AIAgent,
+    MQTTClient,
+    AVCapture,
+    MediaPruner,
+    HardwareController,
+)
 
 from coastal_alpine_core.flywheel import DataFlywheel
 
@@ -28,8 +30,7 @@ logger = logging.getLogger(__name__)
 
 # Load and validate configuration
 try:
-    config = load_config()
-    print_config(config)
+    config = load_bluemoon_config()
 except Exception as e:
     logger.error(f"Failed to load configuration: {e}")
     raise
@@ -66,7 +67,7 @@ class BlueMonPortal:
             retention_hours=config.storage.retention_hours,
             critical_disk_usage_pct=config.storage.critical_disk_usage_pct,
         )
-        self.hardware_control = HardwareControl(
+        self.hardware_control = HardwareController(
             pump_gpio_pin=config.hardware.pump_gpio_pin,
             pump_pwm_frequency=config.hardware.pump_pwm_frequency,
             lighting_gpio_pin=config.hardware.lighting_gpio_pin,

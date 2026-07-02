@@ -4,7 +4,7 @@ import gzip
 import os
 from datetime import datetime, timedelta
 from unittest.mock import patch
-from portal_core.media_pruner import MediaPruner
+from coastal_alpine_core.portal_core.media_pruner import MediaPruner
 
 
 @pytest.fixture
