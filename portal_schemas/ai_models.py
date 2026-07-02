@@ -9,7 +9,7 @@ from typing import Optional
 from datetime import datetime
 from enum import Enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class PumpAction(str, Enum):
@@ -126,10 +126,8 @@ class CropOptimizationPlan(BaseModel):
         description="Flag if plan requires human approval before enforcement",
     )
 
-    class Config:
-        """Pydantic config."""
-
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "plan_id": "opt-2026-05-31-001",
                 "generated_at": "2026-05-31T23:45:00Z",
@@ -142,3 +140,4 @@ class CropOptimizationPlan(BaseModel):
                 "requires_human_review": False,
             }
         }
+    )

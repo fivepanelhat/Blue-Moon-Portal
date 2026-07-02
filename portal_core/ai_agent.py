@@ -368,7 +368,7 @@ JSON: {{"plan_id":"opt-{datetime.now().strftime('%Y%m%d')}", "pump_action":"off|
                     logger.info(
                         f"Optimization plan validated: {validated_plan.plan_id}"
                     )
-                    plan = validated_plan.dict()
+                    plan = validated_plan.model_dump()
                     try:
                         traj = Trajectory(
                             trajectory_id=str(uuid.uuid4()),
@@ -421,7 +421,7 @@ JSON: {{"plan_id":"opt-{datetime.now().strftime('%Y%m%d')}", "pump_action":"off|
             execution_window_minutes=30,
             requires_human_review=True,
         )
-        return default.dict()
+        return default.model_dump()
 
     async def health_check(self) -> bool:
         """

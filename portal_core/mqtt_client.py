@@ -46,7 +46,7 @@ class MQTTClient:
         self.client_id = client_id
         self.username = username
         self.password = password
-        self.client = mqtt.Client(client_id=client_id, protocol=mqtt.MQTTv311)
+        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id=client_id, protocol=mqtt.MQTTv311)
         self.connected = False
         self.message_queue: asyncio.Queue = asyncio.Queue()
 

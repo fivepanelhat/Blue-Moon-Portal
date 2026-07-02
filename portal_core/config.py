@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 import logging
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
@@ -24,14 +24,12 @@ class OllamaConfig(BaseModel):
     )
     model: str = Field(default="gemma4:e4b", description="Model name")
 
-    @validator("host")
+    @field_validator("host")
+    @classmethod
     def validate_host(cls, v):
         if not v.startswith("http://") and not v.startswith("https://"):
             raise ValueError("Ollama host must start with http:// or https://")
         return v
-
-    class Config:
-        env_prefix = "OLLAMA_"
 
 
 class MQTTConfig(BaseModel):
@@ -46,9 +44,6 @@ class MQTTConfig(BaseModel):
     topic_prefix: str = Field(
         default="horowhenua/sensors", description="MQTT topic prefix"
     )
-
-    class Config:
-        env_prefix = "MQTT_"
 
 
 class StorageConfig(BaseModel):
@@ -69,15 +64,13 @@ class StorageConfig(BaseModel):
         default=85.0, ge=50, le=99, description="Critical disk usage threshold"
     )
 
-    @validator("media_dir", "sensor_logs_dir", pre=True)
+    @field_validator("media_dir", "sensor_logs_dir", mode="before")
+    @classmethod
     def validate_paths(cls, v):
         path = Path(v) if isinstance(v, str) else v
         # Create directory if it doesn't exist
         path.mkdir(parents=True, exist_ok=True)
         return path
-
-    class Config:
-        env_prefix = ""  # Use exact names
 
 
 class CameraConfig(BaseModel):
@@ -87,9 +80,6 @@ class CameraConfig(BaseModel):
         default=0, ge=0, description="Camera device index"
     )
     fps: int = Field(default=30, ge=15, le=120, description="Video frame rate")
-
-    class Config:
-        env_prefix = "CAMERA_"
 
 
 class AudioConfig(BaseModel):
@@ -105,15 +95,13 @@ class AudioConfig(BaseModel):
         description="Audio chunk size in samples",
     )
 
-    @validator("sample_rate")
+    @field_validator("sample_rate")
+    @classmethod
     def validate_sample_rate(cls, v):
         valid_rates = [8000, 16000, 44100, 48000]
         if v not in valid_rates:
             raise ValueError(f"Sample rate must be one of {valid_rates}")
         return v
-
-    class Config:
-        env_prefix = "AUDIO_"
 
 
 class HardwareConfig(BaseModel):
@@ -138,9 +126,6 @@ class HardwareConfig(BaseModel):
         default=False, description="Enable actual hardware control"
     )
 
-    class Config:
-        env_prefix = "HARDWARE_"
-
 
 class LoggingConfig(BaseModel):
     """Logging configuration."""
@@ -148,15 +133,13 @@ class LoggingConfig(BaseModel):
     level: str = Field(default="INFO", description="Log level")
     file: Optional[Path] = Field(default=None, description="Log file path")
 
-    @validator("level")
+    @field_validator("level")
+    @classmethod
     def validate_level(cls, v):
         valid_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
         if v.upper() not in valid_levels:
             raise ValueError(f"Log level must be one of {valid_levels}")
         return v.upper()
-
-    class Config:
-        env_prefix = ""  # Use exact names
 
 
 class PortalConfig(BaseModel):
@@ -170,8 +153,7 @@ class PortalConfig(BaseModel):
     hardware: HardwareConfig
     logging: LoggingConfig
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
 
 def load_config() -> PortalConfig:
