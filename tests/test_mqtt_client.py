@@ -70,7 +70,7 @@ async def test_on_connect_callback(mqtt_client):
     with patch.object(mqtt_client.client, "subscribe") as mock_subscribe:
         mqtt_client._on_connect(None, None, None, rc=0)
         assert mqtt_client.connected is True
-        mock_subscribe.assert_called_once_with("horowhenua/sensors/#")
+        mock_subscribe.assert_called_once_with(f"{mqtt_client.topic_prefix}/#")
 
 
 @pytest.mark.asyncio
