@@ -2356,7 +2356,7 @@ import os
 # Define the path to your test footage here
 # Example: os.path.join(PROJECT_PATH, 'test_inference', 'my_video.mp4')
 test_footage_path = os.path.join(
-    PROJECT_PATH, "data/images/val"
+    os.getcwd(), "data/images/val"
 )  # Defaulting to val folder for demo
 
 # Run the prediction script
