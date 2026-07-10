@@ -160,47 +160,83 @@ The portal will:
 
 ## Architecture Overview
 
-This is **not** a simple chatbot hooked up to a water pump—it's a fully agentic architecture:
+Blue Moon is a closed-loop **microgreens / crop** edge agent for Byte Size Kai. MQTT sensors, CSI vision, and audio drive local multimodal Gemma 4 on **RPi 5 16GB + Hailo-10H** with deterministic hardware control.
 
-```plaintext
-┌─────────────────────────────────────────────────────┐
-│           EDGE HARDWARE (RPi 5 + AI HAT+)           │
-├─────────────────────────────────────────────────────┤
-│                                                      │
-│  ┌──────────────┐  ┌──────────────┐  ┌───────────┐ │
-│  │ MQTT Sensors │  │ CSI Camera   │  │ Microphone│ │
-│  │ (Capacitive  │  │ (Leaf Health)│  │ (Anomaly) │ │
-│  │  Moisture,   │  │              │  │ Detection │ │
-│  │  Light, RH)  │  │              │  │           │ │
-│  └──────┬───────┘  └──────┬───────┘  └─────┬─────┘ │
-│         │                 │                 │        │
-│         └─────────────────┼─────────────────┘        │
-│                           ▼                          │
-│                ┌─────────────────────┐               │
-│                │   AI Agent (Gemma   │               │
-│                │  4 E4B via Ollama)  │               │
-│                │  [Multi-modal LLM]  │               │
-│                └────────┬────────────┘               │
-│                         │                            │
-│         ┌───────────────┼───────────────┐            │
-│         ▼               ▼               ▼            │
-│    ┌────────┐      ┌────────┐      ┌────────┐       │
-│    │ Pump   │      │ Light  │      │Alerts  │       │
-│    │Control │      │ Control│      │System  │       │
-│    └────────┘      └────────┘      └────────┘       │
-│                                                      │
-│  ┌──────────────────────────────────────────────┐   │
-│  │  Media Pruner: Auto-cleanup & Compression   │   │
-│  │  (Prevents 24/7 capture from saturating SD) │   │
-│  └──────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────┘
+![Blue Moon Portal architecture — liquid glass overview](assets/architecture_overview.png)
+
+### System map
+
+```mermaid
+%%{init: {
+  "theme": "dark",
+  "themeVariables": {
+    "fontSize": "16px",
+    "fontFamily": "Inter, ui-sans-serif, system-ui, sans-serif",
+    "primaryColor": "#0ea5e9",
+    "primaryTextColor": "#f8fafc",
+    "primaryBorderColor": "#38bdf8",
+    "lineColor": "#67e8f9",
+    "secondaryColor": "#1e293b",
+    "tertiaryColor": "#0f172a",
+    "clusterBkg": "#0b1220cc",
+    "clusterBorder": "#38bdf880",
+    "titleColor": "#e2e8f0"
+  },
+  "flowchart": {
+    "nodeSpacing": 40,
+    "rankSpacing": 48,
+    "padding": 20,
+    "htmlLabels": true,
+    "curve": "basis"
+  }
+}}%%
+flowchart TB
+
+    classDef sense fill:#052e16,stroke:#4ade80,stroke-width:2px,color:#f0fdf4
+    classDef edge fill:#0c4a6e,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff
+    classDef core fill:#134e4a,stroke:#2dd4bf,stroke-width:2px,color:#f0fdfa
+    classDef act fill:#422006,stroke:#fbbf24,stroke-width:2px,color:#fffbeb
+    classDef store fill:#1e1b4b,stroke:#a5b4fc,stroke-width:2px,color:#eef2ff
+    classDef ai fill:#3b0764,stroke:#e879f9,stroke-width:2px,color:#fdf4ff
+    classDef app fill:#1e1b4b,stroke:#c4b5fd,stroke-width:2px,color:#eef2ff
+
+    subgraph IN["① Grow-room inputs"]
+        MQTT["MQTT sensors<br/>moisture · light · RH"]
+        CAM["CSI camera<br/>leaf health"]
+        MIC["Microphone<br/>anomaly audio"]
+    end
+
+    subgraph EDGE["② Edge hardware — RPi 5 16GB + Hailo-10H"]
+        CORE["Coastal-Alpine-Core"]
+        LLM["Gemma 4 e4b via Ollama"]
+        AG["AI agent + schemas"]
+        PRUNE["Media pruner<br/>SD-safe buffers"]
+    end
+
+    subgraph OUT["③ Actuation"]
+        PUMP["Pump control"]
+        LIGHT["Light control"]
+        ALERT["Alerts"]
+    end
+
+    MQTT & CAM & MIC --> CORE --> LLM --> AG
+    AG --> PUMP & LIGHT & ALERT
+    CAM --> PRUNE
+
+    class MQTT,CAM,MIC sense
+    class CORE,AG,PRUNE core
+    class LLM ai
+    class PUMP,LIGHT,ALERT act
 ```
 
-**Data Flow:**
+| Layer | Components | Role |
+| :--- | :--- | :--- |
+| **Inputs** | Sensors + vision + audio | Multi-modal crop state |
+| **Reasoning** | Gemma 4 multimodal | Local, offline |
+| **Control** | Pumps · lights · alerts | Deterministic JSON plans |
+| **Storage** | Media pruner | Prevents SD saturation |
 
-1. **Ingestion:** Paho MQTT streams raw sensor data asynchronously; AV module buffers frame captures and audio clips.
-2. **Analysis:** Gemma 4 E4B-it acts as the orchestrator. It parses multi-modal input against historical logs to spot trends.
-3. **Action & Prediction:** Model generates live optimization scripts. Anomalies trigger local hardware (pumps, lights); predictions feed real-time crop yield and logistics info to the user.
+*Full detail: [ARCHITECTURE.md](./ARCHITECTURE.md) · [HARDWARE_SETUP.md](./HARDWARE_SETUP.md)*
 
 ## Directory Structure
 
