@@ -1,5 +1,22 @@
 # Blue Moon Portal: Byte Size Kai
 
+<!-- BEGIN CAT_CONGRUENCE_SNIPPET -->
+## Coastal Alpine Tech portfolio
+
+[![Stage](https://img.shields.io/badge/Stage-Pre--seed-8B5CF6)](https://github.com/fivepanelhat/fivepanelhat)
+[![Hybrid](https://img.shields.io/badge/Hybrid-Edge%20%2B%20Multi--model-0f766e)](https://github.com/fivepanelhat/fivepanelhat)
+[![HITL](https://img.shields.io/badge/HITL-Draft%2FPrepare%20only-dc2626)](./.github/agent-fleet/AGENTS.md)
+[![Te Mana Raraunga](https://img.shields.io/badge/Te%20Mana%20Raraunga-Aligned-0f766e)](https://github.com/fivepanelhat/fivepanelhat)
+
+**Part of the [Kiwi Edge AI Stack](https://github.com/fivepanelhat/fivepanelhat)** · Founder OS: [NZ-Start-Up](https://github.com/fivepanelhat/NZ-Start-Up) · Agent policy: [`.github/agent-fleet/`](./.github/agent-fleet/)
+
+> Sovereign hybrid edge AI for NZ farms & founders — local-first + multi-model, Te Mana Raraunga aligned — collaborating with Venture Taranaki, startups.com investors & Kotahitanga Investment Fund (HITL + cultural advisory for formal approaches).
+
+**Agents inform, draft, prepare, monitor, and remind. Humans advise, sign, file, send, and pay.**  
+Anti-hallucination policy: [`.github/agent-fleet/anti-hallucination.md`](./.github/agent-fleet/anti-hallucination.md) · Congruence: [`CAT_CONGRUENCE.md`](./CAT_CONGRUENCE.md)
+<!-- END CAT_CONGRUENCE_SNIPPET -->
+
+
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary--Commercial-blue.svg)](./LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org)
 [![Ollama](https://img.shields.io/badge/Ollama-Gemma%204-000000?logo=ollama&logoColor=white)](https://ollama.com)
@@ -24,12 +41,12 @@
 [![RedTeam](https://img.shields.io/github/actions/workflow/status/fivepanelhat/Blue-Moon-Portal/redteam.yml?branch=main&label=RedTeam&color=critical)](https://github.com/fivepanelhat/Blue-Moon-Portal/actions/workflows/redteam.yml)
 [![Dependencies](https://img.shields.io/badge/Dependencies-Monitored-brightgreen?logo=dependabot)](https://github.com/fivepanelhat/Blue-Moon-Portal/security/dependabot)
 
-**Coastal Alpine Tech Limited** — pre-seed startup, New Plymouth, Taranaki, Aotearoa New Zealand.
+**Coastal Alpine Tech Limited** â€” pre-seed startup, New Plymouth, Taranaki, Aotearoa New Zealand.
 
 ![Blue Moon Portal Banner](assets/social_preview.png)
 
 
-**Welcome to the Blue Moon Portal**—the central nervous system for the Byte Size Kai initiative. This repository houses the architecture for an autonomous, on-premise agritech crop tracker designed to optimize microgreen cultivation through edge-based AI.
+**Welcome to the Blue Moon Portal**â€”the central nervous system for the Byte Size Kai initiative. This repository houses the architecture for an autonomous, on-premise agritech crop tracker designed to optimize microgreen cultivation through edge-based AI.
 
 ## The 5 Ws: Project Context
 
@@ -76,7 +93,7 @@ python bootstrap.py
 ### Manual Installation (Bare Metal + Virtual Environment)
 
 <details open>
-<summary><strong>🐧 Linux / macOS (Bash)</strong></summary>
+<summary><strong>ðŸ§ Linux / macOS (Bash)</strong></summary>
 
 ```bash
 # Clone the repository
@@ -98,7 +115,7 @@ cp .env.example .env
 </details>
 
 <details>
-<summary><strong>🪟 Windows (PowerShell)</strong></summary>
+<summary><strong>ðŸªŸ Windows (PowerShell)</strong></summary>
 
 ```powershell
 # Clone the repository
@@ -147,27 +164,27 @@ python validate.py
 
 This will test:
 
-- ✓ Configuration loading from `.env`
-- ✓ Ollama connectivity and model availability
-- ✓ MQTT broker connectivity
-- ✓ Audio/Video capture streams
-- ✓ Hardware control simulation
-- ✓ Media pruner functionality
-- ✓ AI Agent methods and LLM integration
+- âœ“ Configuration loading from `.env`
+- âœ“ Ollama connectivity and model availability
+- âœ“ MQTT broker connectivity
+- âœ“ Audio/Video capture streams
+- âœ“ Hardware control simulation
+- âœ“ Media pruner functionality
+- âœ“ AI Agent methods and LLM integration
 
 **Expected output (6-7/7 tests pass):**
 
 ```plaintext
-✓ PASS: configuration
-✓ PASS: ollama
-✓ PASS: mqtt (or ✗ FAIL if broker not running)
-✓ PASS: av_capture
-✓ PASS: hardware_control
-✓ PASS: media_pruner
-✓ PASS: ai_agent_methods
+âœ“ PASS: configuration
+âœ“ PASS: ollama
+âœ“ PASS: mqtt (or âœ— FAIL if broker not running)
+âœ“ PASS: av_capture
+âœ“ PASS: hardware_control
+âœ“ PASS: media_pruner
+âœ“ PASS: ai_agent_methods
 ```
 
-**Note:** MQTT test may fail if no broker is running locally—this is expected in development. The portal will attempt reconnection at runtime.
+**Note:** MQTT test may fail if no broker is running locallyâ€”this is expected in development. The portal will attempt reconnection at runtime.
 
 ### Running the Portal
 
@@ -186,11 +203,11 @@ The portal will:
 
 ## Architecture Overview
 
-> **Diagrams:** Architecture images and Mermaid maps describe the **target product architecture** for this pre-seed stack. They are engineering design maps — not claims of large-scale commercial fleet deployment.
+> **Diagrams:** Architecture images and Mermaid maps describe the **target product architecture** for this pre-seed stack. They are engineering design maps â€” not claims of large-scale commercial fleet deployment.
 
 Blue Moon is a closed-loop **microgreens / crop** edge agent for Byte Size Kai. MQTT sensors, CSI vision, and audio drive local multimodal Gemma 4 on **RPi 5 16GB + Hailo-10H** with deterministic hardware control.
 
-![Blue Moon Portal architecture — liquid glass overview](assets/architecture_overview.png)
+![Blue Moon Portal architecture â€” liquid glass overview](assets/architecture_overview.png)
 
 ### System map
 
@@ -228,20 +245,20 @@ flowchart TB
     classDef ai fill:#3b0764,stroke:#e879f9,stroke-width:2px,color:#fdf4ff
     classDef app fill:#1e1b4b,stroke:#c4b5fd,stroke-width:2px,color:#eef2ff
 
-    subgraph IN["① Grow-room inputs"]
-        MQTT["MQTT sensors<br/>moisture · light · RH"]
+    subgraph IN["â‘  Grow-room inputs"]
+        MQTT["MQTT sensors<br/>moisture Â· light Â· RH"]
         CAM["CSI camera<br/>leaf health"]
         MIC["Microphone<br/>anomaly audio"]
     end
 
-    subgraph EDGE["② Edge hardware — RPi 5 16GB + Hailo-10H"]
+    subgraph EDGE["â‘¡ Edge hardware â€” RPi 5 16GB + Hailo-10H"]
         CORE["Coastal-Alpine-Core"]
         LLM["Gemma 4 e4b via Ollama"]
         AG["AI agent + schemas"]
         PRUNE["Media pruner<br/>SD-safe buffers"]
     end
 
-    subgraph OUT["③ Actuation"]
+    subgraph OUT["â‘¢ Actuation"]
         PUMP["Pump control"]
         LIGHT["Light control"]
         ALERT["Alerts"]
@@ -261,50 +278,50 @@ flowchart TB
 | :--- | :--- | :--- |
 | **Inputs** | Sensors + vision + audio | Multi-modal crop state |
 | **Reasoning** | Gemma 4 multimodal | Local, offline |
-| **Control** | Pumps · lights · alerts | Deterministic JSON plans |
+| **Control** | Pumps Â· lights Â· alerts | Deterministic JSON plans |
 | **Storage** | Media pruner | Prevents SD saturation |
 
-*Full detail: [ARCHITECTURE.md](./ARCHITECTURE.md) · [HARDWARE_SETUP.md](./HARDWARE_SETUP.md)*
+*Full detail: [ARCHITECTURE.md](./ARCHITECTURE.md) Â· [HARDWARE_SETUP.md](./HARDWARE_SETUP.md)*
 
 ## Directory Structure
 
 ```plaintext
 Blue_Moon_Portal/
-│
-├── portal_core/               # The Engine Room
-│   ├── __init__.py
-│   ├── ai_agent.py            # Multi-modal LLM controller (Gemma 4 via Ollama)
-│   ├── mqtt_client.py         # Paho MQTT subscriber for ESP32 telemetry
-│   ├── av_capture.py          # OpenCV/PyAudio streams (CSI camera + mic)
-│   └── media_pruner.py        # Storage lifecycle management (auto-delete/compress)
-│
-├── portal_schemas/            # The Rulebook (Pydantic enforcement)
-│   ├── __init__.py
-│   └── ai_models.py           # Pydantic classes (SensorReading, AnalysisResult, CropOptimizationPlan)
-│
-├── telemetry_data/            # Local Knowledge Base
-│   ├── sensor_logs/           # Historical MQTT JSON payloads
-│   └── media/                 # Image and audio buffer storage
-│
-├── requirements.txt           # Python dependencies
-├── requirements-dev.txt       # Development tools (pytest, black, mypy)
-├── main.py                    # Asynchronous event loop orchestrator
-├── setup.py                   # Package configuration
-├── .env.example               # Environment variable template
-├── .gitignore                 # Git exclusions (media, .env, __pycache__)
-├── blue-moon.service          # Systemd service for auto-start on boot
-│
-├── README.md                  # This file
-├── ARCHITECTURE.md            # Detailed technical breakdown
-├── HARDWARE_SETUP.md          # RPi5 + Hailo-10H NPU assembly & driver installation
-└── DEVELOPMENT.md             # Local dev setup, mocking, testing
+â”‚
+â”œâ”€â”€ portal_core/               # The Engine Room
+â”‚   â”œâ”€â”€ __init__.py
+â”‚   â”œâ”€â”€ ai_agent.py            # Multi-modal LLM controller (Gemma 4 via Ollama)
+â”‚   â”œâ”€â”€ mqtt_client.py         # Paho MQTT subscriber for ESP32 telemetry
+â”‚   â”œâ”€â”€ av_capture.py          # OpenCV/PyAudio streams (CSI camera + mic)
+â”‚   â””â”€â”€ media_pruner.py        # Storage lifecycle management (auto-delete/compress)
+â”‚
+â”œâ”€â”€ portal_schemas/            # The Rulebook (Pydantic enforcement)
+â”‚   â”œâ”€â”€ __init__.py
+â”‚   â””â”€â”€ ai_models.py           # Pydantic classes (SensorReading, AnalysisResult, CropOptimizationPlan)
+â”‚
+â”œâ”€â”€ telemetry_data/            # Local Knowledge Base
+â”‚   â”œâ”€â”€ sensor_logs/           # Historical MQTT JSON payloads
+â”‚   â””â”€â”€ media/                 # Image and audio buffer storage
+â”‚
+â”œâ”€â”€ requirements.txt           # Python dependencies
+â”œâ”€â”€ requirements-dev.txt       # Development tools (pytest, black, mypy)
+â”œâ”€â”€ main.py                    # Asynchronous event loop orchestrator
+â”œâ”€â”€ setup.py                   # Package configuration
+â”œâ”€â”€ .env.example               # Environment variable template
+â”œâ”€â”€ .gitignore                 # Git exclusions (media, .env, __pycache__)
+â”œâ”€â”€ blue-moon.service          # Systemd service for auto-start on boot
+â”‚
+â”œâ”€â”€ README.md                  # This file
+â”œâ”€â”€ ARCHITECTURE.md            # Detailed technical breakdown
+â”œâ”€â”€ HARDWARE_SETUP.md          # RPi5 + Hailo-10H NPU assembly & driver installation
+â””â”€â”€ DEVELOPMENT.md             # Local dev setup, mocking, testing
 ```
 
 ## Documentation
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** — Data flow, module responsibilities, Gemma 4 config, Pydantic schema definitions
-- **[HARDWARE_SETUP.md](HARDWARE_SETUP.md)** — RPi 5 + Hailo-10H NPU assembly, ESP32 wiring, Ollama installation, **critical NPU driver setup**
-- **[DEVELOPMENT.md](DEVELOPMENT.md)** — Local dev environment, mock MQTT payloads, testing strategies
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** â€” Data flow, module responsibilities, Gemma 4 config, Pydantic schema definitions
+- **[HARDWARE_SETUP.md](HARDWARE_SETUP.md)** â€” RPi 5 + Hailo-10H NPU assembly, ESP32 wiring, Ollama installation, **critical NPU driver setup**
+- **[DEVELOPMENT.md](DEVELOPMENT.md)** â€” Local dev environment, mock MQTT payloads, testing strategies
 
 ## Technology Stack
 
@@ -328,12 +345,12 @@ Blue_Moon_Portal/
 
 ## Key Features
 
-✓ **Edge-Native:** All inference runs locally on RPi 5. No cloud dependency.  
-✓ **Multi-Modal AI:** Simultaneously processes sensor telemetry, visual, and audio data.  
-✓ **Deterministic Output:** Pydantic schemas prevent conversational hallucinations; LLM must output valid JSON or fail loudly.  
-✓ **Auto-Recovery:** Systemd service ensures portal restarts after power loss.  
-✓ **Storage-Aware:** Automated media pruning prevents 24/7 AV capture from filling the SD card.  
-✓ **Open Source:** Full transparency for agricultural data sovereignty.  
+âœ“ **Edge-Native:** All inference runs locally on RPi 5. No cloud dependency.  
+âœ“ **Multi-Modal AI:** Simultaneously processes sensor telemetry, visual, and audio data.  
+âœ“ **Deterministic Output:** Pydantic schemas prevent conversational hallucinations; LLM must output valid JSON or fail loudly.  
+âœ“ **Auto-Recovery:** Systemd service ensures portal restarts after power loss.  
+âœ“ **Storage-Aware:** Automated media pruning prevents 24/7 AV capture from filling the SD card.  
+âœ“ **Open Source:** Full transparency for agricultural data sovereignty.  
 
 ---
 
@@ -375,7 +392,7 @@ This project is Licensed under the Coastal Alpine Tech Limited License. See `LIC
 **Date:** Active development (as of May 31, 2026)
 
 **Reference:**  
-[Running Gemma 4 E4B Locally](https://www.youtube.com/watch?v=NB9zRquoeI0) — Hardware constraints and edge configuration walkthrough.
+[Running Gemma 4 E4B Locally](https://www.youtube.com/watch?v=NB9zRquoeI0) â€” Hardware constraints and edge configuration walkthrough.
 
 ---
 
