@@ -244,7 +244,7 @@ This will test:
 âœ" PASS: ai_agent_methods
 ```
 
-**Note:** MQTT test may fail if no broker is running locallythis is expected in development. The portal will attempt reconnection at runtime.
+**Note:** MQTT test may fail if no broker is running locally this is expected in development. The portal will attempt reconnection at runtime.
 
 ### Running the Portal
 
