@@ -1,6 +1,6 @@
 # COMPLIANCE.md
 
-**Coastal Alpine Tech Limited** · **Product:** Byte Size Kai  
+**Coastal Alpine Tech Limited** | **Product:** Byte Size Kai
 Last updated: 19 July 2026
 
 > Super Grok compliance briefing (19 July 2026). This is **alignment evidence**, not a compliance certificate or legal advice.
@@ -8,16 +8,16 @@ Last updated: 19 July 2026
 ## Regulatory Mapping
 
 ### New Zealand
-- Privacy Act 2020 + **IPP 3A** (Privacy Amendment Act 2025) — effective **1 May 2026**  
+- Privacy Act 2020 + **IPP 3A** (Privacy Amendment Act 2025) - effective **1 May 2026**  
   Notification required when personal information is collected indirectly.
 - Biometric Processing Privacy Code 2025  
   New biometric processing: 3 November 2025  
   Existing biometric processing: 3 August 2026
 - Health Information Privacy Code (applies where health / wellbeing data is processed)
-- Te Mana Raraunga principles — primary data sovereignty framework
+- Te Mana Raraunga principles - primary data sovereignty framework
 
 ### European Union
-- **EU AI Act** — Annex III high-risk obligations enforceable **2 August 2026**
+- **EU AI Act** - Annex III high-risk obligations enforceable **2 August 2026**
 - Relevant high-risk categories:
   - Health decision support
   - Biometrics (remote identification, categorisation, emotion recognition)
@@ -25,9 +25,9 @@ Last updated: 19 July 2026
 - Required: risk management, data governance, technical documentation, human oversight, logging, transparency, post-market monitoring
 
 ### International Standards
-- **ISO/IEC 42001** — AI Management System (AIMS)  
+- **ISO/IEC 42001** - AI Management System (AIMS)  
   Covers AI policy, risk assessment, data governance, human oversight, monitoring, continual improvement
-- **SOC 2** — Security, Availability, Confidentiality, Processing Integrity, Privacy  
+- **SOC 2** - Security, Availability, Confidentiality, Processing Integrity, Privacy  
   Priority for multi-tenant / customer-facing components
 
 ### Core Technical Controls (Mandatory)
